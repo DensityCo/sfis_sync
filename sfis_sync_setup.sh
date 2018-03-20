@@ -4,7 +4,7 @@ apt-get install -y python-setuptools
 
 easy_install awscli
 
-SFIS_SYNC_PATH="/etc/cron.hourly/sfis_sync.sh"
+SFIS_SYNC_PATH="/etc/cron.hourly/sfis_sync"
 
 touch $SFIS_SYNC_PATH
 chmod +x $SFIS_SYNC_PATH
@@ -14,9 +14,6 @@ echo "export AWS_SECRET_ACCESS_KEY=$2" >> $SFIS_SYNC_PATH
 OPERATION=$(basename $3)
 LOCAL_PATH=$3$OPERATION
 S3_PATH=$4/$OPERATION
-function timestamp() { 
-  date "+%Y-%m-%d %H:%M:%S"
-}
 LOG_PATH="$LOCAL_PATH/sync_logs.txt"
 echo "OPERATION=$OPERATION" >> $SFIS_SYNC_PATH
 echo "LOCAL_PATH=$LOCAL_PATH" >> $SFIS_SYNC_PATH
